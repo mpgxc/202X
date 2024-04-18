@@ -1,0 +1,36 @@
+{
+  "name": "202x",
+  "version": "1.0.0",
+  "description": "A simple node setup",
+  "main": "src/infra/main.ts",
+  "author": "mpgxc",
+  "license": "WTFPL",
+  "type": "module",
+  "engines": {
+    "node": ">=20.12.0",
+    "pnpm": ">=9.0.0",
+    "yarn": "please use pnpm instead",
+    "npm": "please use pnpm instead"
+  },
+  "scripts": {
+    "prebuild": "rm -rf build",
+    "build": "tsc --project tsconfig.json",
+    "dev": "tsc --watch src/infra/main.ts",
+    "start": "node --env-file=.env build/infra/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mpgxc/202X.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mpgxc/202X/issues"
+  },
+  "homepage": "https://github.com/mpgxc/202X#readme",
+  "devDependencies": {
+    "@biomejs/biome": "1.7.0",
+    "@tsconfig/node20": "^20.1.4",
+    "@types/node": "^20.12.7",
+    "typescript": "^5.4.5"
+  }
+}

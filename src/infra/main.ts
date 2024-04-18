@@ -1,21 +1,22 @@
-import http from "node:http";
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
+import { resolvers } from "./resolvers";
+import { typeDefs } from "./schema";
 
-const port = process.env.PORT || 3000;
+const { SERVER_HOST, SERVER_PORT } = process.env;
 
-console.log("ENV:", process.env.NODE_ENV);
+(async () => {
+	const server = new ApolloServer({
+		typeDefs,
+		resolvers,
+	});
 
-async function bootstrap(): Promise<unknown> {
-	return Promise.resolve(console.info("Hello World"));
-}
+	const { url } = await startStandaloneServer(server, {
+		listen: {
+			port: Number(SERVER_PORT ?? 4000),
+			host: SERVER_HOST,
+		},
+	});
 
-bootstrap();
-
-const server = http.createServer((req, res) => {
-	res.statusCode = 200;
-	res.setHeader("Content-Type", "text/plain");
-	res.end("Hello, World  !  ");
-});
-
-server.listen(port, () => {
-	console.log(`Server running at http://localhost:${port}`);
-});
+	console.log(`🚀  Server ready at: ${url}`);
+})();

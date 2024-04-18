@@ -1,7 +1,7 @@
 {
-  "extends": "@tsconfig/node20/tsconfig.json",
-  "compilerOptions": {
-    "rootDir": "./src",
-    "outDir": "./build"
-  }
+	"extends": "@tsconfig/node20/tsconfig.json",
+	"compilerOptions": {
+		"rootDir": "./src",
+		"outDir": "./build"
+	}
 }

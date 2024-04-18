@@ -17,6 +17,7 @@
     "build": "tsc --project tsconfig.json",
     "dev": "tsc --watch src/infra/main.ts",
     "start": "node --env-file=.env build/infra/main.js",
+    "format": "biome check --apply-unsafe src/**/*.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

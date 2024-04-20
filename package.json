@@ -7,16 +7,20 @@
 	"license": "WTFPL",
 	"engines": {
 		"node": ">=20.12.0",
-		"pnpm": ">=9.0.0",
-		"yarn": "please use pnpm instead",
-		"npm": "please use pnpm instead"
+		"npm": ">=9.0.0",
+		"yarn": "please use npm instead",
+		"pnpm": "please use npm instead"
 	},
 	"scripts": {
 		"prebuild": "rm -rf build",
+		"predeploy": "npm run build",
 		"build": "tsc --project tsconfig.json",
 		"dev": "tsc --watch src/infra/main.ts",
 		"start": "node --env-file=.env build/infra/main.js",
+		"start:offline": "serverless offline start --stage local",
 		"format": "biome check --apply-unsafe src/**/*.ts",
+		"deploy:hml": "NODE_ENV=homolog serverless deploy --stage hml",
+		"deploy:prd": "NODE_ENV=production serverless deploy --stage prd",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
@@ -31,10 +35,13 @@
 		"@biomejs/biome": "1.7.0",
 		"@tsconfig/node20": "^20.1.4",
 		"@types/node": "^20.12.7",
+		"serverless-offline": "^13.3.4",
+		"serverless-prune-plugin": "^2.0.2",
 		"typescript": "^5.4.5"
 	},
 	"dependencies": {
 		"@apollo/server": "^4.10.3",
+		"@as-integrations/aws-lambda": "^3.1.0",
 		"graphql": "^16.8.1"
 	}
 }

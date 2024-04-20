@@ -1,0 +1,48 @@
+service: sls-wtfpl-cqrs-graphql
+
+useDotenv: true
+
+plugins:
+  - serverless-offline
+  - serverless-prune-plugin
+
+custom:
+  prune:
+    automatic: true
+    number: 1
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  httpApi:
+    cors: true
+
+functions:
+  graphql:
+    handler: build/infra/lambda.handler
+    events:
+      - httpApi:
+          path: /graphql
+          method: POST
+      - httpApi:
+          path: /graphql
+          method: GET
+    environment:
+      NODE_ENV: ${env:NODE_ENV}
+
+package:
+  individually: true
+  excludeDevDependencies: true
+  patterns:
+    - 'build/**'
+    - '!src/**'
+    - '!*.'
+    - '!*.json'
+    - '!*.lock'
+    - '!*.md'
+    - '!*.yml'
+    - '!*.yaml'
+    - '!*.ts'
+    - '!tsconfig.json'
+    - '!package-lock.json'
+    - '!.serverless/**'
